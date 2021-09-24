@@ -25,6 +25,8 @@ module.exports = {
     'no-return-assign': 'off',
     'no-plusplus': 'off',
     'no-underscore-dangle': 'off',
+    'no-shadow': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
   settings: {
     'import/resolver': {
