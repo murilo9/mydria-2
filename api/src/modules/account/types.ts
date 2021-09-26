@@ -22,7 +22,7 @@ export interface SignUpRequest extends Request {
 }
 
 export interface ValidatedSignUpRequest extends SignUpRequest {
-  signUpForm: SignUpForm
+  validatedSignUpForm: SignUpForm
 }
 
 export interface PostSignUpRequest extends ValidatedSignUpRequest {

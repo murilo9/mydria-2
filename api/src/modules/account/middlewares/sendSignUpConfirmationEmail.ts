@@ -9,7 +9,7 @@ export default async function sendSignUpConfirmationEmail(
   sendMail: (message: MailjetMessage) => Promise<void>,
 ) {
   if (requestNotFailed(req)) {
-    const { firstName, email } = req.signUpForm;
+    const { firstName, email } = req.validatedSignUpForm;
     const { accountVerificationCode } = req;
     const verificationLink = `https://mydria.app/api/verificate/${accountVerificationCode}?email=${email}`;
     const messageSubject = 'Confirm your sign up';

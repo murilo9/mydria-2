@@ -9,7 +9,7 @@ describe('Middleware: sendSignUpConfirmationEmail', () => {
   it('should call sendMail once', async () => {
     // Sets the request to be sent
     const req = {
-      signUpForm: {
+      validatedSignUpForm: {
         firstName: 'Murilo',
         email: 'murilohenriquematias@gmail.com',
       },
