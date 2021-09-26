@@ -1,11 +1,17 @@
 import { Request } from 'express';
 
+/**
+ * Users' valid genders.
+ */
 export enum UserGender {
   MASCULINE = 'MASCULINE',
   FEMININE = 'FEMININE',
-  OTHER = 'OTHER'
+  OTHER = 'OTHER' // Uses they/their
 }
 
+/**
+ * User sign up form fields.
+ */
 export type SignUpForm = {
   firstName: string,
   lastName: string,
@@ -17,18 +23,30 @@ export type SignUpForm = {
   gender: UserGender
 }
 
+/**
+ * Sign Up request before validation.
+ */
 export interface SignUpRequest extends Request {
   body: SignUpForm
 }
 
+/**
+ * Sign Up request after validation.
+ */
 export interface ValidatedSignUpRequest extends SignUpRequest {
   validatedSignUpForm: SignUpForm
 }
 
+/**
+ * Sign Up request after email verification was sent.
+ */
 export interface PostSignUpRequest extends ValidatedSignUpRequest {
   accountVerificationCode: string
 }
 
+/**
+ * MailJet service message object.
+ */
 export type MailjetMessage = {
   From: {
     Email: string,
