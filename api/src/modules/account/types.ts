@@ -25,6 +25,10 @@ export interface ValidatedSignUpRequest extends SignUpRequest {
   signUpForm: SignUpForm
 }
 
+export interface PostSignUpRequest extends ValidatedSignUpRequest {
+  accountVerificationCode: string
+}
+
 export type MailjetMessage = {
   From: {
     Email: string,
