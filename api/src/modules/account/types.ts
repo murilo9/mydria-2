@@ -17,8 +17,8 @@ export type SignUpForm = {
   lastName: string,
   email: string,
   password: string,
-  city: string,
-  country: string,
+  city?: string,
+  country?: string,
   birthDate: Date,
   gender: UserGender
 }
@@ -27,7 +27,8 @@ export type SignUpForm = {
  * Sign Up request before validation.
  */
 export interface SignUpRequest extends Request {
-  body: SignUpForm
+  body: SignUpForm,
+  validatedSignUpForm?: SignUpForm
 }
 
 /**
