@@ -6,7 +6,8 @@ import { Request, Response } from 'express';
  * @param dependency
  * @returns
  */
-export default function inject(middleware: (req: Request, res: Response, next: Function, dependency: Function) => void, dependency: Function) {
+export default function inject(middleware: (req: Request, res: Response, next: Function, dependency: Function | Object)
+  => void, dependency: Function | Object) {
   return (req: Request, res: Response, next: Function): void => {
     middleware(req, res, next, dependency);
   };
