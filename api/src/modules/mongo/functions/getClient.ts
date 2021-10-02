@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { Result } from '../../system/types';
+import { Result } from '../../utils/types';
 import writeLog from '../../logging/functions/writeLog';
 
 const PORT = process.env.MONGODB_CONNECTION_PORT || '27017';

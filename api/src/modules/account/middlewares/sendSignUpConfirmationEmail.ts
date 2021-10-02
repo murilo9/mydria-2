@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import requestNotFailed from '../../system/functions/requestNotFailed';
+import requestNotFailed from '../../utils/functions/requestNotFailed';
 import { MailjetMessage, PostSignUpRequest } from '../types';
 
 export default async function sendSignUpConfirmationEmail(
