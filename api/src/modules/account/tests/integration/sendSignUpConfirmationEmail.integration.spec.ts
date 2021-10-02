@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Response } from 'express';
 import sinon from 'sinon';
-import sendSignUpConfirmationEmail from '../../middlewares/sendSignUpConfirmationEmail';
+import sendSignUpConfirmationEmail from '../../functions/sendSignUpConfirmationEmail';
 import { PostSignUpRequest } from '../../types';
 
 /* eslint-disable no-undef */

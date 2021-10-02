@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import requestNotFailed from '../../utils/functions/requestNotFailed';
-import { MailjetMessage, PostSignUpRequest } from '../types';
+import MailjetMessage from '../../mailing/types/MailJetMessage';
 
 export default async function sendSignUpConfirmationEmail(
   req: PostSignUpRequest,

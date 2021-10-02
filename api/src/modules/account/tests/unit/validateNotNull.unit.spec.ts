@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import validateNotNull from '../../functions/validateNotNull';
+import validateNotNull from '../../validators/validateNotNull';
 
 /* eslint-disable no-undef */
 describe('Function: validateNotNull', () => {

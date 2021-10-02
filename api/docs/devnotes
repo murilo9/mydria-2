@@ -1,0 +1,44 @@
+principles:
+  - functional, no classes
+  - test first, code later (TDD)
+  - CLEAN is overkill and overuse layering (lasagna code)
+
+layers:
+  - database: functions that do database queires only
+  - validators: functions tha throw errors based on their parameters
+  - functions: functions that do any other nice stuff for us
+
+-- Use cases --
+
+sign up
+  - validate form
+  - insert on database
+  - send verification mail
+
+create post
+  - clean form
+  - insert on database
+
+create comment
+  - clean form
+  - insert on database
+  - send notification
+
+edit post
+  - clean form
+  - update database
+
+edit comment
+  - clean form
+  - update database
+
+react to post
+  - insert on database
+  - create/update notification
+
+follow
+  - update database
+  - create notification
+
+unfollow
+  - update database

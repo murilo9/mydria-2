@@ -1,12 +1,11 @@
-import { equal } from 'assert';
 import { Response } from 'express';
-import clearString from '../functions/clearString';
-import validateNotNull from '../functions/validateNotNull';
-import validateUserBirthDate from '../functions/validateUserBirthDate';
-import validateUserEmail from '../functions/validateUserEmail';
-import validateUserGender from '../functions/validateUserGender';
-import validateUserName from '../functions/validateUserName';
-import { SignUpRequest } from '../types';
+import clearString from '../../utils/functions/clearString';
+import validateNotNull from '../validators/validateNotNull';
+import validateUserBirthDate from '../validators/validateUserBirthDate';
+import validateUserEmail from '../validators/validateUserEmail';
+import validateUserGender from '../validators/validateUserGender';
+import validateUserName from '../validators/validateUserName';
+import SignUpRequest from '../types/SignUpRequest';
 
 export default function validateSignUpRequest(req: SignUpRequest, res: Response, next: Function) {
   try {
