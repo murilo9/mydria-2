@@ -1,4 +1,4 @@
-import { UserGender } from '../types';
+import UserGender from '../types/UserGender';
 
 export default function validateUserGender(gender: any) {
   if (gender !== UserGender.MASCULINE && gender !== UserGender.FEMININE && gender !== UserGender.OTHER) {

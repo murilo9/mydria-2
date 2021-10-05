@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import validateUserEmail from '../../functions/validateUserEmail';
+import validateUserEmail from '../../validators/validateUserEmail';
 
 /* eslint-disable no-undef */
 describe('Function: validateUserEmail', () => {

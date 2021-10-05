@@ -1,5 +1,3 @@
-import { SignUpForm } from '../types';
-
 export default function validateUserBirthDate(date: Date) {
   const minAge = 14;
   const now = new Date();

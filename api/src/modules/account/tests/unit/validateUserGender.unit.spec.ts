@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import validateUserGender from '../../functions/validateUserGender';
-import { UserGender } from '../../types';
+import UserGender from '../../types/UserGender';
+import validateUserGender from '../../validators/validateUserGender';
 
 /* eslint-disable no-undef */
 describe('Function: validateUserGender', () => {

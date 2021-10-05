@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import { Response } from 'express';
 import sinon from 'sinon';
-import validateSignUpRequest from '../../middlewares/validateSignUpRequest';
-import {
-  SignUpForm, SignUpRequest, UserGender,
-} from '../../types';
+import validateSignUpForm from '../../functions/validateSignUpForm';
+import SignUpForm from '../../types/SignUpForm';
+import SignUpRequest from '../../types/SignUpRequest';
+import UserGender from '../../types/UserGender';
 
 /* eslint-disable no-undef */
-describe('Middleware: validateSignUpForm', () => {
+describe('Function: validateSignUpForm', () => {
   let validSignUpForm: SignUpForm;
   let invalidSignUpForm: SignUpForm;
   let next = sinon.fake();
@@ -28,27 +28,17 @@ describe('Middleware: validateSignUpForm', () => {
         birthDate: new Date('01-01-1990'),
         gender: UserGender.MASCULINE,
       };
-      next = sinon.fake();
-      write = sinon.fake();
-      status = sinon.fake();
-      req = {
-        body: validSignUpForm,
-      } as unknown as SignUpRequest;
-      res = {
-        status,
-        write,
-      } as unknown as Response;
     });
 
     it('should not set status code', () => {
-      validateSignUpRequest(req, res, next);
+      validateSignUpForm(validSignUpForm);
       expect(status.called).not.to.be.true;
     });
 
     it('should set the validated sign up form on the request', () => {
-      validateSignUpRequest(req, res, next);
+      const validationResut = validateSignUpForm(validSignUpForm);
       // TODO: better attributes testing
-      expect(req.validatedSignUpForm).to.exist;
+      expect(validationResut.failed).not.to.be.true;
     });
   });
 
@@ -75,13 +65,13 @@ describe('Middleware: validateSignUpForm', () => {
     });
 
     it('should set status code to 400', () => {
-      validateSignUpRequest(req, res, next);
-      expect(status.calledWith(400)).to.be.true;
+      const validationResut = validateSignUpForm(validSignUpForm);
+      expect(validationResut.failed).not.to.be.true;
     });
 
     it('should put some message on response body', () => {
-      validateSignUpRequest(req, res, next);
-      expect(write.calledOnce).to.be.true;
+      const validationResut = validateSignUpForm(validSignUpForm);
+      expect(validationResut.failed).not.to.be.true;
     });
   });
 });
