@@ -1,20 +1,20 @@
-import { ResponseLog } from '../../logging/types';
+import { Response } from 'express';
+import MailjetMessage from '../../mailing/types/MailJetMessage';
+import { Result } from '../../utils/types';
+import SignUpForm from '../types/SignUpForm';
 import SignUpRequest from '../types/SignUpRequest';
+import User from '../types/User';
+import UserInput from '../types/UserInput';
 
 export default async function signUp(
   req: SignUpRequest,
-  res: ResponseLog,
+  res: Response,
   next: Function,
-  validateSignUpForm,
-  insertUserOnDb,
-  insertUserPasswordOnDb,
-  sendVerificationEmail,
+  validateSignUpForm: (signUpForm: SignUpForm) => Result<string | SignUpForm>,
+  createUser: (user: UserInput, insertUserOnDb, insertUserPasswordOnDb) => Result<User>,
+  sendSignUpConfirmationEmail: (firstName: string, email: string, sendMail: (message: MailjetMessage) => Promise<void>) => Promise<Result<string>>,
+  sendMail: (message: MailjetMessage) => Promise<void>,
 ) {
-  // Validate user form
-
-  // Insert user on database
-
-  // Send verification mail
-
+  // TODO
   next(req, res);
 }
