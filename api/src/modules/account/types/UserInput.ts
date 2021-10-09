@@ -1,9 +1,6 @@
 import UserGender from './UserGender';
 
-/**
- * User sign up form fields.
- */
-type SignUpForm = {
+interface UserInput {
   firstName: string,
   lastName: string,
   email: string,
@@ -11,8 +8,7 @@ type SignUpForm = {
   city?: string,
   country?: string,
   birthDate: Date,
-  gender: UserGender,
-  [key: string]: any
+  gender: UserGender
 }
 
-export default SignUpForm;
+export default UserInput;
