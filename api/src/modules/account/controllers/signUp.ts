@@ -15,6 +15,20 @@ export default async function signUp(
   sendSignUpConfirmationEmail: (firstName: string, email: string, sendMail: (message: MailjetMessage) => Promise<void>) => Promise<Result<string>>,
   sendMail: (message: MailjetMessage) => Promise<void>,
 ) {
-  // TODO
+  // Validate user form
+  const userFormValidation = validateSignUpForm(req.body);
+
+  // If user form is not valid
+  if (userFormValidation.failed) {
+    res.status(400);
+    res.write(userFormValidation.payload);
+  } else {
+    // Insert user on database
+
+    // Send verification mail
+
+    res.status(200);
+    res.write('Account successfully created.');
+  }
   next(req, res);
 }
