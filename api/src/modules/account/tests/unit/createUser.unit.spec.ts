@@ -9,6 +9,13 @@ describe('Function: createUser', () => {
   let userData: UserInput;
   let insertUserOnDb: sinon.SinonSpy;
   let insertUserPasswordOnDb: sinon.SinonSpy;
+  const createdUserMock = {
+    _id: '',
+  };
+  const inserUserOnDbStub = () => ({
+    failed: false,
+    payload: createdUserMock,
+  });
 
   beforeEach(() => {
     userData = {
@@ -21,7 +28,7 @@ describe('Function: createUser', () => {
       birthDate: new Date('06-08-1996'),
       gender: UserGender.FEMININE,
     };
-    insertUserOnDb = sinon.spy();
+    insertUserOnDb = sinon.spy(inserUserOnDbStub);
     insertUserPasswordOnDb = sinon.spy();
   });
 
@@ -29,18 +36,26 @@ describe('Function: createUser', () => {
     const expectedUserData = { ...userData };
     delete expectedUserData.password;
     await createUser(userData, insertUserOnDb, insertUserPasswordOnDb);
-    expect(insertUserOnDb.calledOnceWith(expectedUserData)).to.be.true;
+    expect(insertUserOnDb.calledOnceWith(sinon.match(expectedUserData))).to.be.true;
   });
 
-  it('should call insertUserPasswordOnDb properly', async () => {
-    const userPassword = userData.password;
-    const userId = undefined;
+  it('should call insertUserPasswordOnDb', async () => {
     await createUser(userData, insertUserOnDb, insertUserPasswordOnDb);
-    expect(insertUserPasswordOnDb.calledOnceWith(userPassword, userId)).to.be.true;
+    expect(insertUserPasswordOnDb.calledOnce).to.be.true;
+  });
+
+  it('should not fail', async () => {
+    const createUserResult = await createUser(userData, insertUserOnDb, insertUserPasswordOnDb);
+    expect(createUserResult.failed).not.to.be.true;
   });
 
   it('should return the user properly', async () => {
-    const createdUser = await createUser(userData, insertUserOnDb, insertUserPasswordOnDb);
-    // TODO
+    const createUserResult = await createUser(userData, insertUserOnDb, insertUserPasswordOnDb);
+    expect(createUserResult.payload._id).to.exist;
+  });
+
+  it('should return a result with status 200', async () => {
+    const createUserResult = await createUser(userData, insertUserOnDb, insertUserPasswordOnDb);
+    expect(createUserResult.statusCode).to.be.equal(200);
   });
 });
