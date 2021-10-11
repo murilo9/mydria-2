@@ -1,23 +1,28 @@
 import { expect } from 'chai';
 import { Response } from 'express';
 import sinon from 'sinon';
-import validateSignUpForm from '../../functions/validateSignUpForm';
+import validateSignUpForm from '../../controllers/validateSignUpForm';
 import SignUpForm from '../../types/SignUpForm';
 import SignUpRequest from '../../types/SignUpRequest';
 import UserGender from '../../types/UserGender';
 
 /* eslint-disable no-undef */
-describe('Function: validateSignUpForm', () => {
+describe('Controller: validateSignUpForm', () => {
   let validSignUpForm: SignUpForm;
   let invalidSignUpForm: SignUpForm;
-  let next = sinon.fake();
-  let write = sinon.fake();
-  let status = sinon.fake();
+  let next: sinon.SinonSpy;
+  let status: sinon.SinonSpy;
+  let send: sinon.SinonSpy;
   let req: SignUpRequest;
-  let res: Response;
+  let res;
 
   context('Passing a valid sign up form', () => {
     beforeEach(() => {
+      // Functon spies
+      next = sinon.spy();
+      status = sinon.spy();
+      send = sinon.spy();
+      // Valid sign up form
       validSignUpForm = {
         firstName: 'John',
         lastName: 'Doe',
@@ -28,22 +33,39 @@ describe('Function: validateSignUpForm', () => {
         birthDate: new Date('01-01-1990'),
         gender: UserGender.MASCULINE,
       };
+      // Request object
+      req = {
+        body: validSignUpForm,
+      } as SignUpRequest;
+      // Response object
+      res = {
+        status,
+        send,
+      };
     });
 
     it('should not set status code', () => {
-      validateSignUpForm(validSignUpForm);
+      validateSignUpForm(req, res, next);
       expect(status.called).not.to.be.true;
     });
 
+    it('should call next', () => {
+      validateSignUpForm(req, res, next);
+      expect(next.called).to.be.true;
+    });
+
     it('should set the validated sign up form on the request', () => {
-      const validationResut = validateSignUpForm(validSignUpForm);
-      // TODO: better attributes testing
-      expect(validationResut.failed).not.to.be.true;
+      validateSignUpForm(req, res, next);
+      expect(req.validatedSignUpForm).to.exist;
+      // TODO: better testing on validatedSignUpForm attributes
     });
   });
 
   context('Passing an invalid sign up form', () => {
     beforeEach(() => {
+      next = sinon.spy();
+      status = sinon.spy();
+      send = sinon.spy();
       invalidSignUpForm = {
         firstName: 'A',
         lastName: 'B',
@@ -52,26 +74,28 @@ describe('Function: validateSignUpForm', () => {
         birthDate: new Date(),
         gender: null,
       };
-      next = sinon.fake();
-      write = sinon.fake();
-      status = sinon.fake();
       req = {
         body: invalidSignUpForm,
-      } as unknown as SignUpRequest;
+      } as SignUpRequest;
       res = {
         status,
-        write,
-      } as unknown as Response;
+        send,
+      };
     });
 
     it('should set status code to 400', () => {
-      const validationResut = validateSignUpForm(validSignUpForm);
-      expect(validationResut.failed).not.to.be.true;
+      validateSignUpForm(req, res, next);
+      expect(status.calledOnceWith(400)).to.be.true;
     });
 
-    it('should put some message on response body', () => {
-      const validationResut = validateSignUpForm(validSignUpForm);
-      expect(validationResut.failed).not.to.be.true;
+    it('should not call next', () => {
+      validateSignUpForm(req, res, next);
+      expect(next.called).not.to.be.true;
+    });
+
+    it('should finish the request', () => {
+      validateSignUpForm(req, res, next);
+      expect(send.calledOnce).to.be.true;
     });
   });
 });

@@ -1,13 +1,14 @@
+import { Response } from 'express';
 import clearString from '../../utils/functions/clearString';
 import validateNotNull from '../validators/validateNotNull';
 import validateUserBirthDate from '../validators/validateUserBirthDate';
 import validateUserEmail from '../validators/validateUserEmail';
 import validateUserGender from '../validators/validateUserGender';
 import validateUserName from '../validators/validateUserName';
-import SignUpForm from '../types/SignUpForm';
-import { Result } from '../../utils/types';
+import SignUpRequest from '../types/SignUpRequest';
 
-export default function validateSignUpForm(signUpForm: SignUpForm): Result<string | SignUpForm> {
+export default function validateSignUpForm(req: SignUpRequest, res: Response, next: Function) {
+  const signUpForm = { ...req.body };
   try {
     const signUpFormFields = [
       'firstName',
@@ -35,15 +36,10 @@ export default function validateSignUpForm(signUpForm: SignUpForm): Result<strin
       city: clearString(signUpForm.city),
       country: clearString(signUpForm.country),
     };
-    return {
-      payload: validatedSignUpForm,
-      failed: false,
-    };
+    req.validatedSignUpForm = validatedSignUpForm;
+    next();
   } catch (error) {
-    return {
-      failed: true,
-      statusCode: 400,
-      payload: error,
-    };
+    res.status(400);
+    res.send(error);
   }
 }

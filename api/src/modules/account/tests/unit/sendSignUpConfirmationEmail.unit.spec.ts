@@ -1,15 +1,38 @@
 import { expect } from 'chai';
-import { Response } from 'express';
 import sinon from 'sinon';
-import sendSignUpConfirmationEmail from '../../functions/sendSignUpConfirmationEmail';
+import sendSignUpConfirmationEmail from '../../controllers/sendSignUpConfirmationEmail';
+import ValidatedSignUpRequest from '../../types/ValidatedSignUpRequest';
 
 /* eslint-disable no-undef */
-describe('Function: sendSignUpConfirmationEmail', () => {
+describe('Controller: sendSignUpConfirmationEmail', () => {
+  let req: ValidatedSignUpRequest;
+  let res;
+  let status: sinon.SinonSpy;
+  let send: sinon.SinonSpy;
+  let end: sinon.SinonSpy;
+  const next = () => { };
+
+  beforeEach(() => {
+    status = sinon.spy();
+    send = sinon.spy();
+    end = sinon.spy();
+    const validatedSignUpForm = {
+      email: 'john.doe@email.com',
+      firstName: 'John',
+    };
+    req = {
+      validatedSignUpForm,
+    } as ValidatedSignUpRequest;
+    res = {
+      status,
+      send,
+      end,
+    };
+  });
+
   it('should call sendMail once', async () => {
-    const firstName = 'Murilo';
-    const lastName = 'murilohenriquematias@gmail.com';
     const sendMail = sinon.fake();
-    await sendSignUpConfirmationEmail(firstName, lastName, sendMail);
+    await sendSignUpConfirmationEmail(req, res, next, sendMail);
     expect(sendMail.calledOnce).to.be.true;
   });
 });

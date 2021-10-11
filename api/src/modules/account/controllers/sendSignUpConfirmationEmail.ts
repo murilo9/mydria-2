@@ -1,8 +1,7 @@
 import { Response } from 'express';
 import { v4 as uuid } from 'uuid';
-import requestNotFailed from '../../utils/functions/requestNotFailed';
 import MailjetMessage from '../../mailing/types/MailJetMessage';
-import { Result } from '../../utils/types';
+import ValidatedSignUpRequest from '../types/ValidatedSignUpRequest';
 
 /**
  * Creates and sends the sign up verification email. Returns the account verification hash.
@@ -12,10 +11,12 @@ import { Result } from '../../utils/types';
  * @returns The account verification hash.
  */
 export default async function sendSignUpConfirmationEmail(
-  firstName: string,
-  email: string,
+  req: ValidatedSignUpRequest,
+  res: Response,
+  next: Function,
   sendMail: (message: MailjetMessage) => Promise<void>,
-): Promise<Result<string>> {
+) {
+  const { email, firstName } = req.validatedSignUpForm;
   const accountVerificationHash = uuid();
   const verificationLink = `https://mydria.app/api/verificate/${accountVerificationHash}?email=${email}`;
   const messageSubject = 'Confirm your sign up';
@@ -36,15 +37,9 @@ export default async function sendSignUpConfirmationEmail(
   };
   try {
     await sendMail(message);
-    return {
-      failed: false,
-      payload: accountVerificationHash,
-    };
+    res.end();
   } catch (error) {
-    return {
-      failed: true,
-      payload: 'There was an error while trying to send the verification mail',
-      statusCode: 500,
-    };
+    res.status(500);
+    res.send('There was an error while trying to send the verification mail');
   }
 }

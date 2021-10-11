@@ -4,6 +4,9 @@ import SignUpForm from './SignUpForm';
 /**
  * Sign Up request before validation.
  */
-export default interface SignUpRequest extends Request {
+interface SignUpRequest extends Request {
   body: SignUpForm,
+  validatedSignUpForm?: SignUpForm
 }
+
+export default SignUpRequest;

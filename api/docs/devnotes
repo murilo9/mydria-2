@@ -1,7 +1,7 @@
 principles:
   - functional, no classes
   - test first, code later (TDD)
-  - CLEAN is overkill and overuse layering (lasagna code)
+  - CLEAN is overkill and overuses layering (lasagna code)
 
 layers:
   - database: functions that do database queires only
@@ -12,33 +12,33 @@ layers:
 
 sign up
   - validate form
-  - insert on database
+  - create user (insert on database)
   - send verification mail
 
 create post
   - clean form
-  - insert on database
+  - create post (insert on database)
 
 create comment
   - clean form
-  - insert on database
+  - create comment (insert on database)
   - send notification
 
 edit post
   - clean form
-  - update database
+  - edit post (update database)
 
 edit comment
   - clean form
-  - update database
+  - edit comment (update database)
 
 react to post
   - insert on database
   - create/update notification
 
 follow
-  - update database
+  - follow user (update database)
   - create notification
 
 unfollow
-  - update database
+  - unfollow user (update database)
