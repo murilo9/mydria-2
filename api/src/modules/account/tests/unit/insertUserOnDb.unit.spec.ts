@@ -4,14 +4,7 @@ import UserGender from '../../types/UserGender';
 
 /* eslint-disable no-undef */
 describe('Function: insertUserOnDb', () => {
-  before(() => {
-    process.env.MONGODB_CONNECTION_PORT = '27020';
-    process.env.MONGODB_DATABASE = 'mydria_db_test';
-    process.env.MONGODB_USERNAME = 'mydria';
-    process.env.MONGODB_PASSWORD = 'mydria_test';
-  });
-
-  xit('should insert the user on database', async () => {
+  it('should insert the user on database', async () => {
     const userData = {
       firstName: 'Billy',
       lastName: 'Idol',
