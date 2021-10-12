@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { Result } from '../../utils/types';
+import { Result } from '../../system/types';
 import writeLog from '../../logging/functions/writeLog';
 
 const PORT = process.env.MONGODB_CONNECTION_PORT || '27017';
@@ -9,7 +9,6 @@ const PASSWORD = process.env.MONGODB_PASSWORD;
 
 export default async function getClient(): Promise<Result<MongoClient>> {
   try {
-    console.log('getting mongo client:', PORT, DB_NAME, USER, PASSWORD);
     const mongoClient = await MongoClient.connect(`mongodb://${USER}:${PASSWORD}@localhost:${PORT}/${DB_NAME}`);
     return {
       failed: false,
