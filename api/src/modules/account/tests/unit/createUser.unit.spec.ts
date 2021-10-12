@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import createUserController from '../../controllers/createUser';
+import SignUpForm from '../../types/SignUpForm';
 import UserGender from '../../types/UserGender';
-import UserInput from '../../types/UserInput';
 import ValidatedSignUpRequest from '../../types/ValidatedSignUpRequest';
 
 /* eslint-disable no-undef */
@@ -12,7 +12,7 @@ describe('Controller: createUser', () => {
   let write: sinon.SinonSpy;
   let status: sinon.SinonSpy;
   let next: sinon.SinonSpy;
-  let userData: UserInput;
+  let userData: SignUpForm;
   let insertUserOnDb: sinon.SinonSpy;
   let insertUserPasswordOnDb: sinon.SinonSpy;
 
