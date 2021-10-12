@@ -1,6 +1,6 @@
 import { Application } from 'express';
-import sendMail from '../mailing/functions/sendMail';
-import inject from '../utils/functions/inject';
+import sendMail from '../mailing/domain/sendMail';
+import inject from '../utils/helpers/inject';
 import createUser from './controllers/createUser';
 import sendSignUpConfirmationEmail from './controllers/sendSignUpConfirmationEmail';
 import validateSignUpForm from './controllers/validateSignUpForm';

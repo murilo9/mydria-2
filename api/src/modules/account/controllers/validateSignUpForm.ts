@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import clearString from '../../utils/functions/clearString';
+import clearString from '../../utils/helpers/clearString';
 import validateNotNull from '../validators/validateNotNull';
 import validateUserBirthDate from '../validators/validateUserBirthDate';
 import validateUserEmail from '../validators/validateUserEmail';

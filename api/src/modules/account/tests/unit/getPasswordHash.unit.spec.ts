@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import getPasswordHash from '../../functions/getPasswordHash';
+import getPasswordHash from '../../domain/getPasswordHash';
 
 /* eslint-disable no-undef */
 describe('Function: getPasswordHash', () => {

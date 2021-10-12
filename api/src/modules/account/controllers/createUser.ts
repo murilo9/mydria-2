@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { Result } from '../../utils/types';
 import User from '../types/User';
 import UserInput from '../types/UserInput';
-import getPasswordHash from '../functions/getPasswordHash';
+import getPasswordHash from '../domain/getPasswordHash';
 import ValidatedSignUpRequest from '../types/ValidatedSignUpRequest';
 
 export default async function createUser(

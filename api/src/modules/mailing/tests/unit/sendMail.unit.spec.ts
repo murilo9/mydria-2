@@ -1,4 +1,4 @@
-import sendMail from '../../functions/sendMail';
+import sendMail from '../../domain/sendMail';
 
 /* eslint-disable no-undef */
 describe('Function: sendMail', () => {
