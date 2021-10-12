@@ -1,11 +1,14 @@
 import { expect } from 'chai';
 import insertUserOnDb from '../../database/insertUserOnDb';
 import UserGender from '../../types/UserGender';
+import UserInput from '../../types/UserInput';
 
 /* eslint-disable no-undef */
 describe('Function: insertUserOnDb', () => {
-  it('should insert the user on database', async () => {
-    const userData = {
+  let userData: UserInput;
+
+  beforeEach(() => {
+    userData = {
       firstName: 'Billy',
       lastName: 'Idol',
       email: 'billy.idol@email.com',
@@ -14,6 +17,9 @@ describe('Function: insertUserOnDb', () => {
       birthDate: new Date('06-08-1996'),
       gender: UserGender.MASCULINE,
     };
+  });
+
+  it('should not fail', async () => {
     const insertionResult = await insertUserOnDb(userData);
     expect(insertionResult.failed).not.to.be.true;
   });
