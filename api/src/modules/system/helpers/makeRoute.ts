@@ -1,9 +1,14 @@
+/* eslint-disable max-len */
 import { Request, Response } from 'express';
 import Controller from '../types/Controller';
 import IAssertiveController from '../types/IAssertiveController';
 import IRestrictAccessController from '../types/IRestricAccessController';
 
-export default function makeRoute(controller: Controller & IAssertiveController & IRestrictAccessController) {
+export default function makeRoute(controller:
+  | Controller
+  | (Controller & IAssertiveController)
+  | (Controller & IRestrictAccessController)
+  | (Controller & IAssertiveController & IRestrictAccessController)) {
   return async (request: Request, response: Response) => {
     try {
       // If the controller has a validator

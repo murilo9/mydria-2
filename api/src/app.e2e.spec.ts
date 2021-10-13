@@ -6,25 +6,11 @@ import MydriaApp from './App';
 chai.use(chaiHttp);
 
 describe('Test', () => {
-  it('should work req1', async () => {
+  it('should work', async () => {
     const { app } = new MydriaApp();
-    const req1 = chai.request(app)
-      .get('/test').send()
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.equal('works!!!');
-      });
-  });
-
-  it('should work req2', async () => {
-    const { app } = new MydriaApp();
-    const req2 = chai.request(app)
-      .post('/foo').send()
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.equal('bar');
-      });
+    const res = await chai.request(app)
+      .get('/stuff').send();
+    expect(res).to.have.status(200);
+    expect(res.text).to.be.equal('some stuff');
   });
 });
