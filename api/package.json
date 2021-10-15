@@ -10,7 +10,7 @@
     "test": "yarn test:unit; yarn test:integration; yarn test:e2e",
     "test:unit": "node_modules/.bin/mocha -r ts-node/register src/**/*.unit.spec.ts -r dotenv/config --require babel-register",
     "test:integration": "node_modules/.bin/mocha -r ts-node/register src/**/*.integration.spec.ts --require babel-register",
-    "test:e2e": "node_modules/.bin/mocha -r ts-node/register src/**/*.e2e.spec.ts --require babel-register",
+    "test:e2e": "env-cmd -e test node_modules/.bin/mocha -r ts-node/register src/**/*.e2e.spec.ts --require babel-register",
     "docker:create:dev": "docker run -d --name mydria_mongo_dev -e MONGODB_USERNAME=mydria_dev -e MONGODB_PASSWORD=mydria_dev -e MONGODB_DATABASE=mydria_db_dev -p 27020:27017 bitnami/mongodb:latest",
     "docker:remove:dev": "docker stop mydria_mongo_dev; docker rm mydria_mongo_dev",
     "docker:create:test": "docker run -d --name mydria_mongo_test -e MONGODB_USERNAME=mydria_test -e MONGODB_PASSWORD=mydria_test -e MONGODB_DATABASE=mydria_db_test -p 27020:27017 bitnami/mongodb:latest",
@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/murilo9/mydria-2#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",
@@ -36,6 +37,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/chai": "^4.2.21",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",

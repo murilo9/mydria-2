@@ -4,5 +4,5 @@ import SignUpController from './controllers/SignUp';
 import validateSignUpForm from './validators/validateSignUpForm';
 
 export default function accountRoutes(app: Application) {
-  app.get('/stuff', makeRoute(new SignUpController(validateSignUpForm)));
+  app.post('/signup', makeRoute(new SignUpController(validateSignUpForm)));
 }
