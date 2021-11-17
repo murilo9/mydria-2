@@ -7,6 +7,7 @@ layers:
   - database: functions that do database queires only
   - validators: functions tha throw errors based on their parameters
   - functions: functions that do any other nice stuff for us
+  - controllers: just like other functions, but they receive req and res objects, and could either shortcut requests or call next()
 
 -- Use cases --
 
