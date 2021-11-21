@@ -20,10 +20,10 @@ export default function makeRoute(controller:
         }
       }
       // If the controller has an authenticator
-      if ('authenticator' in controller) {
-        const authentication = await controller.authenticator(request);
-        if (authentication.failed) {
-          response.status(authentication.statusCode).send(authentication.payload);
+      if ('authorizator' in controller) {
+        const authorization = await controller.authorizator(request);
+        if (authorization.failed) {
+          response.status(authorization.statusCode).send(authorization.payload);
           return;
         }
       }

@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import makeRoute from '../system/helpers/makeRoute';
-import userOwnsUser from './authenticators/userOwnsUser';
+import userOwnsUser from './authorizators/userOwnsUser';
 import SignUpController from './controllers/SignUp';
 import UpdateUserDataController from './controllers/UpdateUserInfo';
 import validateSignUpForm from './validators/validateSignUpForm';

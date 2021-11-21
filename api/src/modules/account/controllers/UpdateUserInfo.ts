@@ -10,12 +10,12 @@ import UpdateUserInfoRequest from '../types/UpdateUserInfoRequest';
 export default class UpdateUserDataController extends Controller implements IAssertiveController, IRestrictAccessController {
   validator: ResultAsyncFunction;
 
-  authenticator: ResultAsyncFunction;
+  authorizator: ResultAsyncFunction;
 
-  constructor(validator: ResultAsyncFunction, authenticator: ResultAsyncFunction) {
+  constructor(validator: ResultAsyncFunction, authorizator: ResultAsyncFunction) {
     super();
     this.validator = validator;
-    this.authenticator = authenticator;
+    this.authorizator = authorizator;
   }
 
   async handle(request: UpdateUserInfoRequest): Promise<Result<UpdateUserInfoForm>> {
