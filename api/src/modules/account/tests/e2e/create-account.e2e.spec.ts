@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import MydriaApp from './App';
-import UserGender from './modules/account/types/UserGender';
+import UserGender from '../../types/UserGender';
+import MydriaApp from '../../../../App';
 
 chai.use(chaiHttp);
 
-describe('Test', () => {
-  it('should work', async () => {
+describe('Flow: create account', () => {
+  xit('should create account', async () => {
     const { app } = new MydriaApp();
     const signUpForm = {
       firstName: 'Jane',
