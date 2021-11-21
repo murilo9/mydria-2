@@ -7,4 +7,18 @@ import getUserFromDatabase from '../DAL/getUserFromDatabase';
  */
 export default async function userOwnsUser(request: Request): Promise<Result<string>> {
   console.log('authorizating...');
+  const { userId } = request.params;
+  const getRequestingUserFromDb = await getUserFromDatabase(userId);
+  const requestingUserExists = getRequestingUserFromDb.payload;
+  if (!requestingUserExists) {
+    return {
+      failed: true,
+      payload: 'The user does not exist',
+      statusCode: getRequestingUserFromDb.statusCode,
+    };
+  }
+  // TODO verify JWT token
+  return {
+    failed: false,
+  };
 }
