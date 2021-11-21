@@ -11,19 +11,19 @@ export default function makeRoute(controller:
   | (Controller & IAssertiveController & IRestrictAccessController)) {
   return async (request: Request, response: Response) => {
     try {
-      // If the controller has a validator
-      if ('validator' in controller) {
-        const validation = await controller.validator(request);
-        if (validation.failed) {
-          response.status(validation.statusCode).send(validation.payload);
-          return;
-        }
-      }
       // If the controller has an authenticator
       if ('authorizator' in controller) {
         const authorization = await controller.authorizator(request);
         if (authorization.failed) {
           response.status(authorization.statusCode).send(authorization.payload);
+          return;
+        }
+      }
+      // If the controller has a validator
+      if ('validator' in controller) {
+        const validation = await controller.validator(request);
+        if (validation.failed) {
+          response.status(validation.statusCode).send(validation.payload);
           return;
         }
       }
