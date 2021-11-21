@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import Result from '../../system/types/Result';
-import getUserFromDatabase from '../DAL/getUserFromDatabase';
+import getUserFromDatabase from '../db/getUserFromDatabase';
 
 /**
  * Verifies if user id from request JWT token matches user id from route

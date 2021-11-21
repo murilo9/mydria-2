@@ -3,7 +3,7 @@ import IAssertiveController from '../../system/types/IAssertiveController';
 import IRestrictAccessController from '../../system/types/IRestricAccessController';
 import Result from '../../system/types/Result';
 import ResultAsyncFunction from '../../system/types/ResultAsyncFunction';
-import updateUserInfoOnDatabase from '../DAL/updateUserOnDatabase';
+import updateUserInfoOnDatabase from '../db/updateUserOnDatabase';
 import UpdateUserInfoForm from '../types/UpdateUserInfoForm';
 import UpdateUserInfoRequest from '../types/UpdateUserInfoRequest';
 

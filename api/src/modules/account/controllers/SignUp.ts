@@ -2,8 +2,8 @@ import Controller from '../../system/types/Controller';
 import IAssertiveController from '../../system/types/IAssertiveController';
 import Result from '../../system/types/Result';
 import ResultAsyncFunction from '../../system/types/ResultAsyncFunction';
-import insertUserOnDatabase from '../DAL/insertUserOnDatabase';
-import insertUserPasswordOnDatabase from '../DAL/insertUserPasswordOnDb';
+import insertUserOnDatabase from '../db/insertUserOnDatabase';
+import insertUserPasswordOnDatabase from '../db/insertUserPasswordOnDb';
 import getPasswordHash from '../domain/getPasswordHash';
 import { SignUpRequest } from '../types/SignUpRequest';
 
