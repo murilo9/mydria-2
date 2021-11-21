@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, ObjectId } from 'mongodb';
 import getClient from '../../mongo/functions/getClient';
 import Result from '../../system/types/Result';
 import UpdateUserInfoForm from '../types/UpdateUserInfoForm';
@@ -15,7 +15,7 @@ export default async function updateUserInfoOnDatabase(user: UpdateUserInfoForm,
       ...user,
       updated: new Date(),
     };
-    await db.collection('users').updateOne({ _id: userId }, { $set: { ...userToUpdate } });
+    await db.collection('users').updateOne({ _id: new ObjectId(userId) }, { $set: { ...userToUpdate } });
     return {
       failed: false,
       statusCode: 200,

@@ -8,5 +8,5 @@ import validateUserInfoForm from './validators/validateUserInfoForm';
 
 export default function accountRoutes(app: Application) {
   app.post('/signup', makeRoute(new SignUpController(validateSignUpForm)));
-  app.put('/user/:id', makeRoute(new UpdateUserDataController(validateUserInfoForm, userOwnsUser)));
+  app.put('/user/:userId', makeRoute(new UpdateUserDataController(validateUserInfoForm, userOwnsUser)));
 }
