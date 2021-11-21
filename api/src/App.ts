@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import accountRoutes from './modules/account/routes';
+import postRoutes from './modules/post/routes';
 
 export default class MydriaApp {
   public app: express.Application;
@@ -19,6 +20,7 @@ export default class MydriaApp {
 
   private loadRoutes(): void {
     accountRoutes(this.app);
+    postRoutes(this.app);
   }
 
   public listen(port: number | string) {
