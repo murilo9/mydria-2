@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 describe('Flow: update user info', () => {
   const userId = 'noUserIdWasSetOnCurrentTest';
 
-  it('should update account info', async () => {
+  xit('should update account info', async () => {
     const { app } = new MydriaApp();
     const updateUserInfoForm = {
       firstName: 'Billy',
