@@ -18,13 +18,15 @@ export default class SignUpController extends Controller implements IAssertiveCo
   async handle(request: SignUpRequest): Promise<Result<any>> {
     // TODO: collect formatted form data from request body
     const signUpForm = { ...request.body };
+    const { password } = signUpForm;
+    delete signUpForm.password;
     // Insert user on database
     const createUserResult = await insertUserOnDatabase(signUpForm);
     if (createUserResult.failed) {
       return createUserResult;
     }
     // Insert user password on database
-    const passwordHash = await getPasswordHash(signUpForm.password);
+    const passwordHash = await getPasswordHash(password);
     const createPasswordResult = await insertUserPasswordOnDatabase(passwordHash, createUserResult.payload._id);
     if (createPasswordResult.failed) {
       return createPasswordResult;
