@@ -5,7 +5,7 @@ import MydriaApp from '../../../../App';
 
 chai.use(chaiHttp);
 
-describe('Flow: create account', () => {
+describe('Flow: create post', () => {
   xit('should create post', async () => {
     const { app } = new MydriaApp();
     const postForm = {
