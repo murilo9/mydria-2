@@ -6,7 +6,7 @@ import MydriaApp from '../../../../App';
 chai.use(chaiHttp);
 
 describe('Flow: remove post', () => {
-  it('should remove post', async () => {
+  xit('should remove post', async () => {
     const { app } = new MydriaApp();
     const postId = '619ad4f672b9cba287bab359'
     const res = await chai.request(app)

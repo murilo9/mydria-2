@@ -6,7 +6,7 @@ import MydriaApp from '../../../../App';
 chai.use(chaiHttp);
 
 describe('Flow: update post', () => {
-  it('should update post', async () => {
+  xit('should update post', async () => {
     const { app } = new MydriaApp();
     const postId = 'noPostIdWasSetOnCurrentTest'
     const postToUpdate = {
