@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb';
 import getClient from '../../mongo/functions/getClient';
 import Result from '../../system/types/Result';
+import SignUpForm from '../types/SignUpForm';
 import User from '../types/User';
-import UserInput from '../types/UserInput';
 
-export default async function inserUserOnDatabase(user: UserInput): Promise<Result<User>> {
+export default async function inserUserOnDatabase(user: SignUpForm): Promise<Result<User>> {
   const requestClientResult = await getClient();
   if (requestClientResult.failed) {
     return requestClientResult;

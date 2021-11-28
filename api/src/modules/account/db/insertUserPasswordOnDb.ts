@@ -1,7 +1,6 @@
 import { MongoClient } from 'mongodb';
 import getClient from '../../mongo/functions/getClient';
 import Result from '../../system/types/Result';
-import UserInput from '../types/UserInput';
 import { UserPassword } from '../types/UserPassword';
 
 export default async function inserUserPasswordOnDatabase(hash: string, userId: string): Promise<Result<UserPassword>> {
