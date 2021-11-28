@@ -20,6 +20,8 @@ export default class CreatePostController implements IAssertiveController, IRest
     const { userId } = request.params;
     const postToCreate = {
       user: userId,
+      created: new Date(),
+      updated: new Date(),
       ...request.body,
     };
     const createPostResult = await insertPostOnDatabase(postToCreate);

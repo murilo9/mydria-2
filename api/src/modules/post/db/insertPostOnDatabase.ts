@@ -2,8 +2,9 @@ import { MongoClient } from 'mongodb';
 import getClient from '../../mongo/functions/getClient';
 import Result from '../../system/types/Result';
 import Post from '../types/Post';
+import PostInput from '../types/PostInput';
 
-export default async function insertPostOnDatabase(post: Post): Promise<Result<Post>> {
+export default async function insertPostOnDatabase(post: PostInput): Promise<Result<Post>> {
   const requestClientResult = await getClient();
   if (requestClientResult.failed) {
     return requestClientResult;
