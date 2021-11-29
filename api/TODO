@@ -1,4 +1,6 @@
 - login and get token on every e2e test
+- make db functions and controllers return objects propperly
+- review validators very conception
 
 - comments
 - decent e2e tests structure

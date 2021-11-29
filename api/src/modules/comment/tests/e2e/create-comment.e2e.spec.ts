@@ -12,7 +12,7 @@ describe('Flow: create comment', () => {
     const userId = 'noUserIdWasSetOnCurrentTest'
     const postForm = {
       body: {
-        text: 'This is a post',
+        text: 'Hmmmm THIS is an interesting post!',
       },
     };
     const res = await chai.request(app)
