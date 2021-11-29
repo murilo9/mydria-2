@@ -1,4 +1,5 @@
 - login and get token on every e2e test
+- get userId from requeste headers, not by route
 - make db functions and controllers return objects propperly
 - review validators very conception
 
