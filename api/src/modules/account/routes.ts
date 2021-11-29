@@ -1,17 +1,16 @@
 import { Application } from 'express';
-import sendMail from '../mailing/functions/sendMail';
-import inject from '../utils/functions/inject';
-import createUser from './controllers/createUser';
-import sendSignUpConfirmationEmail from './controllers/sendSignUpConfirmationEmail';
-import validateSignUpForm from './controllers/validateSignUpForm';
-import insertUserOnDb from './database/insertUserOnDb';
-import insertUserPasswordOnDb from './database/insertUserPasswordOnDb';
+import makeRoute from '../system/helpers/makeRoute';
+import verifyJWT from '../system/helpers/verifyJWT';
+import userOwnsUser from './authorizators/userOwnsUser';
+import SignInController from './controllers/SignIn';
+import SignUpController from './controllers/SignUp';
+import UpdateUserDataController from './controllers/UpdateUserInfo';
+import validateSignInForm from './validators/validateSignInForm';
+import validateSignUpForm from './validators/validateSignUpForm';
+import validateUserInfoForm from './validators/validateUserInfoForm';
 
-export default function routes(app: Application) {
-  app.post(
-    '/signup',
-    validateSignUpForm,
-    inject(createUser, insertUserOnDb, insertUserPasswordOnDb),
-    inject(sendSignUpConfirmationEmail, sendMail),
-  );
+export default function accountRoutes(app: Application) {
+  app.post('/signup', makeRoute(new SignUpController(validateSignUpForm)));
+  app.post('/signin', makeRoute(new SignInController(validateSignInForm)));
+  app.put('/user/:userId', verifyJWT, makeRoute(new UpdateUserDataController(validateUserInfoForm, userOwnsUser)));
 }
