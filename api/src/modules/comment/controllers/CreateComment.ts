@@ -17,9 +17,10 @@ export default class CreateCommentController implements IAssertiveController, IR
   }
 
   async handle(request: CreateCommentRequest): Promise<Result<Comment>> {
-    const { userId, postId } = request.params;
+    const { postId } = request.params;
+    const { requesterId } = request.headers
     const commentToCreate = {
-      user: userId,
+      user: requesterId,
       post: postId,
       created: new Date(),
       updated: new Date(),

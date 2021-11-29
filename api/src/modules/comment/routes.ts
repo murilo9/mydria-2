@@ -6,5 +6,5 @@ import CreateCommentController from './controllers/CreateComment';
 import validateComment from './validators/validateComment';
 
 export default function postRoutes(app: Application) {
-  app.post('/post/:postId/:userId', verifyJWT, makeRoute(new CreateCommentController(userOwnsUser, validateComment)))
+  app.post('/post/:postId/comments', verifyJWT, makeRoute(new CreateCommentController(userOwnsUser, validateComment)))
 }
