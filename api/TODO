@@ -1,7 +1,17 @@
-- login and get token on every e2e test
-- get userId from requeste headers, not by route
-- make db functions and controllers return objects propperly
+(Yeah, I know I should have used Jira for this)
+
+HIGH PRIORITY
+
+... login and get token on every e2e test
+... get userId from request headers, not from route
+
 - review validators very conception
 
-- comments
+MID PRIORITY
+
+- make db functions and controllers return objects propperly
+
+LOW PRIORITY
+
+- comments CRUD
 - decent e2e tests structure
