@@ -6,7 +6,7 @@ export default function verifyJWT(request: Request, response: Response, next: Fu
   const token = request.headers['x-access-token'];
   if (!token) return response.status(401).json({ message: 'No token provided.' });
 
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return response.status(500).json({ message: 'Could not validate token.' });
     // Save the requesting user ID on the request headers
     request.headers.requesterId = decoded.id;
