@@ -6,14 +6,18 @@ import getPostFromDatabase from '../db/getPostFromDatabase';
  * Verifies if user id from request JWT token matches user id from post
  */
 export default async function userOwnsPost(request: Request): Promise<Result<string>> {
-  console.log('authorizating...');
+  console.log('Authorizating: userOwnsPost');
   const { postId } = request.params;
+  const userId = request.headers['user-id'];
   const getPostFromDb = await getPostFromDatabase(postId);
   if (getPostFromDb.failed) {
     return getPostFromDb
   }
-  // TODO verify user id from JWT token with post user
+  const post = getPostFromDb.payload;
+  const userOwnsPost = post.user === userId;
   return {
-    failed: false,
-  };
+    failed: !userOwnsPost,
+    payload: !userOwnsPost ? 'User does not own the post' : null,
+    statusCode: userOwnsPost ? 200 : 403,
+  }
 }

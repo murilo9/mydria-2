@@ -1,26 +1,22 @@
 import IAssertiveController from '../../system/types/IAssertiveController';
-import IRestrictAccessController from '../../system/types/IRestricAccessController';
 import Result from '../../system/types/Result';
 import ResultAsyncFunction from '../../system/types/ResultAsyncFunction';
 import insertCommentOnDatabase from '../db/insertCommentOnDatabase';
 import Comment from '../types/Comment';
 import CreateCommentRequest from '../types/CreateCommentRequest';
 
-export default class CreateCommentController implements IAssertiveController, IRestrictAccessController {
+export default class CreateCommentController implements IAssertiveController {
   validator: ResultAsyncFunction;
 
-  authorizator: ResultAsyncFunction;
-
-  constructor(authorizator: ResultAsyncFunction, validator: ResultAsyncFunction) {
-    this.authorizator = authorizator;
+  constructor(validator: ResultAsyncFunction) {
     this.validator = validator;
   }
 
   async handle(request: CreateCommentRequest): Promise<Result<Comment>> {
     const { postId } = request.params;
-    const { requesterId } = request.headers
+    const userId = request.headers['user-id'];
     const commentToCreate = {
-      user: requesterId,
+      user: userId,
       post: postId,
       created: new Date(),
       updated: new Date(),

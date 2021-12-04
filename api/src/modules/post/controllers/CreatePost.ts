@@ -6,18 +6,15 @@ import insertPostOnDatabase from '../db/insertPostOnDatabase';
 import CreatePostRequest from '../types/CreatePostRequest';
 import Post from '../types/Post';
 
-export default class CreatePostController implements IAssertiveController, IRestrictAccessController {
+export default class CreatePostController implements IAssertiveController {
   validator: ResultAsyncFunction;
 
-  authorizator: ResultAsyncFunction;
-
-  constructor(authorizator: ResultAsyncFunction, validator: ResultAsyncFunction) {
-    this.authorizator = authorizator;
+  constructor(validator: ResultAsyncFunction) {
     this.validator = validator;
   }
 
   async handle(request: CreatePostRequest): Promise<Result<Post>> {
-    const { userId } = request.params;
+    const userId = request.headers['user-id'];
     const postToCreate = {
       user: userId,
       created: new Date(),

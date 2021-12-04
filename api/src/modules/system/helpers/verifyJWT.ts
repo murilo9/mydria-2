@@ -9,7 +9,7 @@ export default function verifyJWT(request: Request, response: Response, next: Fu
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return response.status(500).json({ message: 'Could not validate token.' });
     // Save the requesting user ID on the request headers
-    request.headers.requesterId = decoded.id;
+    request.headers['user-id'] = decoded.id;
     next();
   });
 }
