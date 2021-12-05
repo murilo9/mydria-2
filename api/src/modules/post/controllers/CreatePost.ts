@@ -1,5 +1,4 @@
 import IAssertiveController from '../../system/types/IAssertiveController';
-import IRestrictAccessController from '../../system/types/IRestricAccessController';
 import Result from '../../system/types/Result';
 import ResultAsyncFunction from '../../system/types/ResultAsyncFunction';
 import insertPostOnDatabase from '../db/insertPostOnDatabase';

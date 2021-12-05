@@ -7,7 +7,6 @@ chai.use(chaiHttp);
 
 describe('Flow: create post', () => {
   const { app } = new MydriaApp();
-  const userId = 'noUserIdWasSetForCurrentTest'
   let xAccessToken;
 
   before(async () => {
@@ -22,13 +21,14 @@ describe('Flow: create post', () => {
 
   xit('should create post', async () => {
     const postForm = {
-      user: userId,
       body: {
         text: 'This is a post',
       },
     };
     const res = await chai.request(app)
-      .post(`/user/${postForm.user}/posts`).set('x-access-token', xAccessToken).send(postForm);
+      .post('/posts')
+      .set('x-access-token', xAccessToken)
+      .send(postForm);
     expect(res).to.have.status(201);
   });
 });

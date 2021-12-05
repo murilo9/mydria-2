@@ -7,7 +7,18 @@ import MydriaApp from '../../../../App';
 chai.use(chaiHttp);
 
 describe('Flow: update user info', () => {
-  const userId = 'noUserIdWasSetOnCurrentTest';
+  const { app } = new MydriaApp();
+  let xAccessToken;
+
+  before(async () => {
+    const signinForm = {
+      email: 'jane.doe@email.com',
+      password: 'janepass123',
+    }
+    const loginRequest = await chai.request(app)
+      .post('/signin').send(signinForm)
+    xAccessToken = loginRequest.text;
+  })
 
   xit('should update account info', async () => {
     const { app } = new MydriaApp();
@@ -21,7 +32,9 @@ describe('Flow: update user info', () => {
       gender: UserGender.MASCULINE,
     };
     const res = await chai.request(app)
-      .put(`/user/${userId}`).send(updateUserInfoForm);
+      .put('/user/me')
+      .set('x-access-token', xAccessToken)
+      .send(updateUserInfoForm);
     expect(res).to.have.status(200);
   });
 });
