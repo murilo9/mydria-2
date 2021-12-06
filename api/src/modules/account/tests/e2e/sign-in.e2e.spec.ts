@@ -14,7 +14,6 @@ describe('Flow: sign in', () => {
     };
     const res = await chai.request(app)
       .post('/signin').send(signInForm);
-    console.log(res.text)
     expect(res).to.have.status(200);
   });
 });

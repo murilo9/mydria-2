@@ -9,7 +9,7 @@ const PASSWORD = process.env.MONGODB_PASSWORD;
 
 export default async function getClient(): Promise<Result<MongoClient>> {
   try {
-    console.log('getting client:', PORT, DB_NAME, USER, PASSWORD);
+    // console.log('getting client:', PORT, DB_NAME, USER, PASSWORD);
     const mongoClient = await MongoClient.connect(`mongodb://${USER}:${PASSWORD}@localhost:${PORT}/${DB_NAME}`);
     return {
       failed: false,

@@ -6,7 +6,6 @@ import getCommentFromDatabase from '../db/getCommentFromDatabase';
  * Verifies if user id from request JWT token matches user id from comment
  */
 export default async function userOwnsComment(request: Request): Promise<Result<string>> {
-  console.log('Authorizating: userOwnsComment');
   const { commentId } = request.params;
   const userId = request.headers['user-id'];
   const getCommentFromDb = await getCommentFromDatabase(commentId);
