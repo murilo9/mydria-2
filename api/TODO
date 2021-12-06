@@ -2,13 +2,9 @@
 
 HIGH PRIORITY
 
-... login and get token on every e2e test
-... get userId from request headers, not from route
-
-- review validators very conception
-
 MID PRIORITY
 
+- implement validators (there aren't any yet)
 - make db functions and controllers return objects propperly
 
 LOW PRIORITY
