@@ -3,6 +3,7 @@ import cors from 'cors';
 import accountRoutes from './modules/account/routes';
 import postRoutes from './modules/post/routes';
 import commentRoutes from './modules/comment/routes';
+import reactionRoutes from './modules/reaction/routes';
 
 export default class MydriaApp {
   public app: express.Application;
@@ -23,6 +24,7 @@ export default class MydriaApp {
     accountRoutes(this.app);
     postRoutes(this.app);
     commentRoutes(this.app);
+    reactionRoutes(this.app);
   }
 
   public listen(port: number | string) {

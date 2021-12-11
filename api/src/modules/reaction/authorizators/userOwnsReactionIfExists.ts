@@ -14,7 +14,7 @@ export default async function userOwnsReactionIfExists(request: Request): Promis
     return getReactionFromDb;
   }
   // If reaction exists, verify if user owns it
-  if (getReactionFromDb.payload) {
+  if (getReactionFromDb.statusCode === 200) {
     const reaction = getReactionFromDb.payload;
     // If the user does not own it, unauthorize it
     if (reaction.user !== userId) {

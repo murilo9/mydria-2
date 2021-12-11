@@ -23,17 +23,18 @@ export default class ReactController implements IAssertiveController, IRestrictA
   async handle(request: Request): Promise<Result<Reaction | string>> {
     const userId = request.headers['user-id'] as string;
     const resourceId = request.params.postId || request.params.commentId
-    const type = request.params.type as ReactionType
+    const reactionType = request.params.type === 'like' ? ReactionType.LIKE : ReactionType.DISLIKE
     // Verify if reaction exists
     const reactionExists = await getReactionFromDatabase(userId, resourceId)
     // If reaction exists, update it (if is opposite) or remove it (if is same)
-    if (reactionExists.payload) {
+    if (reactionExists.statusCode === 200) {
       const reaction = reactionExists.payload as Reaction
-      if (reaction.type === type) {
-        const removeReactionResult = await removeReactionFromDatabase(reaction._id);
+      const reactionId = reaction._id;
+      if (reaction.type === reactionType) {
+        const removeReactionResult = await removeReactionFromDatabase(reactionId);
         return removeReactionResult;
       }
-      const updateReactionResult = await updateReactionOnDatabase(resourceId, type);
+      const updateReactionResult = await updateReactionOnDatabase(reactionId, reactionType);
       return updateReactionResult;
     }
     // If reacton does not exist, create it
@@ -42,8 +43,9 @@ export default class ReactController implements IAssertiveController, IRestrictA
       created: new Date(),
       updated: new Date(),
       resource: resourceId,
-      type: request.body.type,
+      type: reactionType,
     };
+    console.log('creating reaction')
     const createReactionResult = await insertReactionOnDatabase(reactionToCreate);
     return createReactionResult;
   }

@@ -16,7 +16,7 @@ export default async function getReactionFromDatabase(userId: string, resourceId
       return {
         failed: true,
         statusCode: 404,
-        payload: 'Post does not exist',
+        payload: 'Resource does not exist',
       }
     }
 
