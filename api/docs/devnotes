@@ -1,13 +1,13 @@
 principles:
-  - functional, no classes
-  - test first, code later (TDD)
+  - functional first, use classes only when they really help
   - CLEAN is overkill and overuses layering (lasagna code)
 
 layers:
-  - database: functions that do database queires only
-  - validators: functions tha throw errors based on their parameters
-  - functions: functions that do any other nice stuff for us
-  - controllers: just like other functions, but they receive req and res objects, and could either shortcut requests or call next()
+  - db: functions that do database queires only
+  - validators: functions that receive the request and validate its data
+  - authorizators: functions that receive the request and verify if the requester has authorization for that flow
+  - domain: holds functions that do any other nice stuff for us
+  - controllers: make flows happen. They receive req and res objects
 
 -- Use cases --
 
@@ -34,7 +34,7 @@ edit comment
   - edit comment (update database)
 
 react to post
-  - insert on database
+  - update/remove/insert on database
   - create/update notification
 
 follow
