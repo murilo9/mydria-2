@@ -1,4 +1,8 @@
 import { Request } from 'express';
+import getCommentFromDatabase from '../../comment/db/getCommentFromDatabase';
+import insertNotificationOnDatabase from '../../notification/db/insertNotificationOnDatabase';
+import NotificationType from '../../notification/types/NotificationType';
+import getPostFromDatabase from '../../post/db/getPostFromDatabase';
 import IAssertiveController from '../../system/types/IAssertiveController';
 import IRestrictAccessController from '../../system/types/IRestricAccessController';
 import Result from '../../system/types/Result';
@@ -45,8 +49,37 @@ export default class ReactController implements IAssertiveController, IRestrictA
       resource: resourceId,
       type: reactionType,
     };
-    console.log('creating reaction')
     const createReactionResult = await insertReactionOnDatabase(reactionToCreate);
+    // Create notification for the reaction
+    let notificationType = null;
+    const resourcePost = await getPostFromDatabase(resourceId);
+    const resourceComment = await getCommentFromDatabase(resourceId);
+    // If reacted to post
+    if (!resourcePost.failed) {
+      notificationType = NotificationType.POST_REACTION
+    }
+    // If reacted to comment
+    if (!resourceComment.failed) {
+      notificationType = NotificationType.COMMENT_REACTION
+    }
+    // If neither
+    if (!notificationType) {
+      return {
+        failed: true,
+        statusCode: 404,
+        payload: 'The resource (post or comment) was not found',
+      }
+    }
+    // Finally, insert the notification on database
+    const reactionNotification = {
+      type: notificationType,
+      user: userId,
+      url: 'TODO',
+    }
+    const createNotificationResult = await insertNotificationOnDatabase(reactionNotification);
+    if (createNotificationResult.failed) {
+      return createNotificationResult
+    }
     return createReactionResult;
   }
 }
