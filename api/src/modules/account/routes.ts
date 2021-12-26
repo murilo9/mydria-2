@@ -1,6 +1,7 @@
 import { Application } from 'express';
 import makeRoute from '../system/helpers/makeRoute';
 import verifyJWT from '../system/helpers/verifyJWT';
+import FollowController from './controllers/Follow';
 import SignInController from './controllers/SignIn';
 import SignUpController from './controllers/SignUp';
 import UpdateUserDataController from './controllers/UpdateUserInfo';
@@ -12,4 +13,5 @@ export default function accountRoutes(app: Application) {
   app.post('/signup', makeRoute(new SignUpController(validateSignUpForm)));
   app.post('/signin', makeRoute(new SignInController(validateSignInForm)));
   app.put('/user/me', verifyJWT, makeRoute(new UpdateUserDataController(validateUserInfoForm)));
+  app.post('/follow/:userId', verifyJWT, makeRoute(new FollowController()));
 }
