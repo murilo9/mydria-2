@@ -1,3 +1,7 @@
+import insertNotificationOnDatabase from '../../notification/db/insertNotificationOnDatabase';
+import NotificationType from '../../notification/types/NotificationType';
+import getPostFromDatabase from '../../post/db/getPostFromDatabase';
+import Post from '../../post/types/Post';
 import IAssertiveController from '../../system/types/IAssertiveController';
 import Result from '../../system/types/Result';
 import ResultAsyncFunction from '../../system/types/ResultAsyncFunction';
@@ -23,6 +27,19 @@ export default class CreateCommentController implements IAssertiveController {
       ...request.body,
     };
     const createCommentResult = await insertCommentOnDatabase(commentToCreate);
+    // Create notification for comment
+    const getPostFromDb = await getPostFromDatabase(postId);
+    if (getPostFromDb.failed) {
+      return getPostFromDb;
+    }
+    const post = getPostFromDb.payload as Post
+    const postOwner = post.user
+    const commentNotification = {
+      type: NotificationType.POST_COMMENT,
+      user: postOwner,
+      url: 'TODO',
+    }
+    await insertNotificationOnDatabase(commentNotification);
     return createCommentResult;
   }
 }
