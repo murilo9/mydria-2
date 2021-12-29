@@ -1,10 +1,14 @@
-import { AppBar, Container, Typography } from '@mui/material';
+import { Container, Toolbar } from '@mui/material';
 import React from 'react';
 import { Outlet } from 'react-router';
+import TopBar from '../TopBar';
 
 export default function AppLayout() {
   return <>
-    <h1>App Layout</h1>
-    <Outlet />
+    <TopBar />
+    <Toolbar />
+    <Container maxWidth="xl">
+      <Outlet />
+    </Container>
   </>
 }
