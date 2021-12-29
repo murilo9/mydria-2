@@ -1,4 +1,6 @@
 import { Request } from 'express';
+import insertNotificationOnDatabase from '../../notification/db/insertNotificationOnDatabase';
+import NotificationType from '../../notification/types/NotificationType';
 import Controller from '../../system/types/Controller';
 import Result from '../../system/types/Result';
 import getFollowingFromDatabase from '../db/getFollowingFromDatabase';
@@ -10,7 +12,7 @@ export default class FollowController extends Controller {
   async handle(request: Request): Promise<Result<any>> {
     const userId = request.headers['user-id'] as string // Me
     const userToFollow = request.params.userId // Nice person
-    const getFollowingList = await getFollowingFromDatabase(userId) // If the nice person is followed by be
+    const getFollowingList = await getFollowingFromDatabase(userId) // If the nice person is already followed by be
     if (getFollowingList.failed) {
       return getFollowingList
     }
@@ -26,6 +28,16 @@ export default class FollowController extends Controller {
       by: userId,
     }
     const insertFollow = await insertFollowOnDatabase(follow)
+    // Create notification
+    const followNotification = {
+      user: userToFollow,
+      type: NotificationType.FOLLOW,
+      url: 'TODO',
+    }
+    const insertNotification = await insertNotificationOnDatabase(followNotification);
+    if (insertNotification.failed) {
+      return insertNotification
+    }
     return insertFollow
   }
 }
