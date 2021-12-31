@@ -9,7 +9,7 @@ type FollowButtonProps = {
 export default function FollowButton({ following }: FollowButtonProps) {
   return <>
     <Button
-      sx={{ width: 1 }}
+      sx={{ width: { xs: 'auto', md: 1 } }}
       disableElevation
       variant={following ? "contained" : "text"}
       color={following ? "info" : "primary"}
