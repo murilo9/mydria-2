@@ -33,8 +33,9 @@ export default function Post() {
           if you like.
         </Typography>
       </CardContent>
-      <Box>
+      <Box sx={{ position: 'relative', height: 0, paddingTop: '100%', overflow: 'hidden' }}>
         <CardMedia
+          sx={{ position: 'absolute', top: 0 }}
           component="img"
           image={paella}
           alt="Paella dish"
