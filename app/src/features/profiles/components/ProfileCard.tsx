@@ -5,13 +5,13 @@ import FollowButton from './FollowButton';
 
 export default function ProfileCard() {
   return <>
-    <Card>
+    <Card sx={{ display: { xs: 'none', md: 'block' } }} variant="outlined">
       <CardMedia
         component="img"
         image={person}
         alt="Paella dish"
       />
-      <CardContent sx={{ position: 'relative', marginTop: '-32px', paddingBottom: '16px !important' }}>
+      <CardContent sx={{ position: 'relative', marginTop: '-48px', paddingBottom: '16px !important' }}>
         <Card elevation={0} variant="outlined">
           <CardContent>
             <Typography variant="h6">
