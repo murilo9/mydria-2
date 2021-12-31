@@ -5,7 +5,7 @@ import React from 'react';
 export default function TopBar() {
   return <>
     <AppBar position="fixed">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ px: { xs: 3, sm: 8, md: 7 } }}>
         <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography
             variant="h6"
@@ -19,7 +19,7 @@ export default function TopBar() {
               <Home sx={{ ml: 2 }} />
               <Notifications sx={{ ml: 2 }} />
             </Box>
-            <IconButton sx={{ ml: 3 }}>
+            <IconButton>
               <Avatar>M</Avatar>
             </IconButton>
           </Box>
