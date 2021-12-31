@@ -2,6 +2,7 @@ import { PlayArrow, SkipNext, SkipPrevious } from '@mui/icons-material';
 import { Box, Card, CardActions, CardContent, CardMedia, Divider, Grid, IconButton, Typography } from '@mui/material';
 import React from 'react';
 import person from '../../../assets/person.jpg';
+import LayoutDivider from '../../../components/Elements/LayoutDivider';
 import FollowButton from './FollowButton';
 
 export default function MobileProfileCard() {
@@ -50,9 +51,6 @@ export default function MobileProfileCard() {
         <FollowButton following={false} sx={{ width: 1 }} />
       </CardActions>
     </Card>
-    <Box sx={{ my: { xs: 1, sm: 2 }, display: { xs: 'block', md: 'none' } }}>
-      <Divider />
-      <Divider sx={{ mt: 1 }} />
-    </Box>
+    <LayoutDivider sx={{ display: { xs: 'block', md: 'none' } }} />
   </>
 }
