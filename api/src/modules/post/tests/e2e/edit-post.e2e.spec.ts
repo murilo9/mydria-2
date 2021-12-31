@@ -28,6 +28,7 @@ describe('Flow: update post', () => {
         img: 'it now has an image url',
         link: 'and a link as well',
       },
+      tags: ['DifferentTagThisTime'],
     };
     const res = await chai.request(app)
       .put(`/post/${postId}`)

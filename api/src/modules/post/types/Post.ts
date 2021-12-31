@@ -6,5 +6,6 @@ export default interface Post extends PersistentEntity {
     text: string,
     picture?: string,
     link?: string
-  }
+  },
+  tags: String[]
 }

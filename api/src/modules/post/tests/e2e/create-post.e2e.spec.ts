@@ -24,6 +24,7 @@ describe('Flow: create post', () => {
       body: {
         text: 'This is a post',
       },
+      tags: ['HashTag', 'CoolStuff'],
     };
     const res = await chai.request(app)
       .post('/posts')

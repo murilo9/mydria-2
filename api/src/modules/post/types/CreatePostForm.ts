@@ -4,5 +4,6 @@ export default interface CreatePostForm {
     text: string,
     picture?: string,
     link?: string
-  }
+  },
+  tags: String[]
 }
