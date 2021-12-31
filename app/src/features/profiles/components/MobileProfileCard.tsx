@@ -6,7 +6,7 @@ import FollowButton from './FollowButton';
 
 export default function MobileProfileCard() {
   return <>
-    <Card sx={{ display: { xs: 'flex', md: 'none' } }} elevation={0}>
+    <Card sx={{ display: { xs: 'block', md: 'none' } }} elevation={0}>
       <CardContent sx={{ pt: 1 }}>
         <Grid container>
           <Grid item xs={3}>
@@ -32,8 +32,8 @@ export default function MobileProfileCard() {
                   Vestibulum porttitor in enim quis accumsan. Etiam bibendum augue pretium magna tincidunt.
                 </Typography>
               </CardContent>
-              <CardActions sx={{ pt: 2, display: { xs: 'none', sm: 'block' } }}>
-                <FollowButton following={true} />
+              <CardActions sx={{ pt: 2, pl: 2, display: { xs: 'none', sm: 'block' } }}>
+                <FollowButton following={false} />
               </CardActions>
             </Card>
           </Grid>
@@ -46,8 +46,11 @@ export default function MobileProfileCard() {
           </Grid>
         </Grid>
       </CardContent>
+      <CardActions sx={{ pt: 2, mb: 2, display: { xs: 'block', sm: 'none' } }}>
+        <FollowButton following={false} sx={{ width: 1 }} />
+      </CardActions>
     </Card>
-    <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+    <Box sx={{ my: { xs: 1, sm: 2 }, display: { xs: 'block', md: 'none' } }}>
       <Divider />
       <Divider sx={{ mt: 1 }} />
     </Box>

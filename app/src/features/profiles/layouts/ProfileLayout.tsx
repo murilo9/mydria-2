@@ -8,7 +8,7 @@ type ProfileLayoutProps = {
 
 const ProfileLayout: React.FC<ProfileLayoutProps> = ({ detailsColumn, postsList }: ProfileLayoutProps) => {
   return <>
-    <Grid container sx={{ pt: 3 }} spacing={3}>
+    <Grid container sx={{ pt: 3, px: { sm: 6, md: 4 } }} spacing={3}>
       <Grid item xs={12} md={4} lg={3}>
         {detailsColumn}
       </Grid>
