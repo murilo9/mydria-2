@@ -7,7 +7,7 @@ import LikeButton from '../../../components/Elements/LikeButton';
 
 export default function Post() {
   return <>
-    <Card>
+    <Card sx={{ mb: 2 }} variant="outlined">
       <CardHeader
         avatar={
           <Avatar>M</Avatar>
@@ -33,12 +33,13 @@ export default function Post() {
           if you like.
         </Typography>
       </CardContent>
-      <CardMedia
-        component="img"
-        height="194"
-        image={paella}
-        alt="Paella dish"
-      />
+      <Box>
+        <CardMedia
+          component="img"
+          image={paella}
+          alt="Paella dish"
+        />
+      </Box>
       <CardActions>
         <LikeButton amount={12} active={false} />
         <DislikeButton amount={5} active={false} />
