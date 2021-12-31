@@ -7,7 +7,7 @@ export default function AppLayout() {
   return <>
     <TopBar />
     <Toolbar />
-    <Container maxWidth="xl">
+    <Container maxWidth="lg">
       <Outlet />
     </Container>
   </>
