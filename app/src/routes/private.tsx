@@ -1,3 +1,4 @@
+import React from "react";
 import {
   BrowserRouter,
   Routes,
@@ -5,29 +6,17 @@ import {
   Navigate
 } from "react-router-dom";
 import AppLayout from "../components/Layout/AppLayout";
-import Post from "../features/posts/components/Post";
-import MobileProfileCard from "../features/profiles/components/MobileProfileCard";
-import ProfileCard from "../features/profiles/components/ProfileCard";
-import ProfileLayout from "../features/profiles/layouts/ProfileLayout";
+import FeedProvider from "../features/posts/components/FeedProvider";
+import ProfileProvider from "../features/profiles/components/ProfileProvider";
 
 function PrivateRoutes() {
   return <>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
-          <Route index element={<div>
-            <h1>Feed</h1>
-            <Post />
-          </div>} />
+          <Route index element={<FeedProvider />} />
           <Route path="profile">
-            <Route path=":userId" element={
-              <ProfileLayout detailsColumn={
-                <>
-                  <ProfileCard />
-                  <MobileProfileCard />
-                </>
-              } postsList={<h1>Posts List</h1>} />
-            } />
+            <Route path=":userId" element={<ProfileProvider />} />
             <Route index element={<Navigate to="/" />} />
           </Route>
           <Route path="post">
