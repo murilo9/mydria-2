@@ -1,7 +1,7 @@
 import Result from "../../../types/Result";
 import baseUrl from "../../../utils/baseUrl";
 import http from "../../../utils/http";
-import Post from "../types/Post";
+import Post from "../types/PostData";
 import CreatePostForm from "../types/CreatePostForm";
 
 /**

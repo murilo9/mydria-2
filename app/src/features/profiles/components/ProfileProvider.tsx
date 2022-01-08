@@ -15,7 +15,7 @@ export default function ProfileProvider() {
     <ProfileLayout
       detailsColumn={<ProfileDetailsColumn />}
       postsList={
-        <PostsList posts={profilePosts} />
+        <PostsList posts={[]} />
       }
       sideColumn={<HashinTags />}
     />

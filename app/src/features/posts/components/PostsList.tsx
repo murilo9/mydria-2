@@ -1,14 +1,19 @@
 import React from 'react';
 import Post from './Post';
+import PostData from '../types/PostData'
 
 type PostsListProps = {
-  posts: Array<any>,  // TODO use Post type. It's Posts data, NOT Post components!
+  posts: PostData[],  // TODO use Post type. It's Posts data, NOT Post components!
   children?: any   // The PostForm may go here
 }
 
 export default function PostsList({ children, posts }: PostsListProps) {
   return <>
     {children}
-    {posts.map(post => <Post />)}
+    {
+      posts.length ?
+        posts.map(post => <Post {...post} />)
+        : 'Nothing to show'
+    }
   </>
 }

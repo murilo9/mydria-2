@@ -1,5 +1,5 @@
 import Result from "../../../types/Result";
-import Post from "../types/Post";
+import Post from "../types/PostData";
 import http from "../../../utils/http";
 import baseUrl from "../../../utils/baseUrl";
 
