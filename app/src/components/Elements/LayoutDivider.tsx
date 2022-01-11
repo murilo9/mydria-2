@@ -7,7 +7,7 @@ type LayoutDividerProps = {
 
 export default function LayoutDivider({ sx }: LayoutDividerProps) {
   return <>
-    <Box sx={{ my: { xs: 1, sm: 2, ...sx } }}>
+    <Box sx={{ my: { xs: 1, sm: 2 }, ...sx }}>
       <Divider />
       <Divider sx={{ mt: 1 }} />
     </Box>
