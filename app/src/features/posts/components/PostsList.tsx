@@ -12,7 +12,7 @@ export default function PostsList({ children, posts }: PostsListProps) {
     {children}
     {
       posts.length ?
-        posts.map(post => <Post {...post} />)
+        posts.map(post => <Post {...post} key={post._id} />)
         : 'Nothing to show'
     }
   </>
