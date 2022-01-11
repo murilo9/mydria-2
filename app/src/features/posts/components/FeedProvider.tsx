@@ -23,16 +23,16 @@ export default function FeedProvider() {
   }, [])
 
   return <>
-    {
-      loading ? 'Loading Feed...' :
-        <FeedLayout
-          postsList={
-            <PostsList posts={feedPosts}>
-              <PostForm />
-            </PostsList>
-          }
-          sideColumn={<HashinTags />}
-        />
-    }
+    <FeedLayout
+      postsList={
+        loading ?
+          <>Loading Feed...</>
+          :
+          <PostsList posts={feedPosts}>
+            <PostForm />
+          </PostsList>
+      }
+      sideColumn={<HashinTags />}
+    />
   </>
 }
