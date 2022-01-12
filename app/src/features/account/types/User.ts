@@ -7,5 +7,7 @@ export default interface User {
   city: string,
   country: string,
   birthDate: Date,
-  gender: UserGender
+  gender: UserGender,
+  bio: string,
+  pictureUrl: string | null
 }

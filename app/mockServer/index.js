@@ -50,9 +50,11 @@ const johnDoe = {
   firstName: 'John',
   lastName: 'Doe',
   city: 'New York',
-  country: 'United States',
+  country: 'USA',
   birthDate: new Date('06-05-1962'),
   gender: 'MASCULINE',
+  pictureUrl: 'https://m0.her.ie/wp-content/uploads/2018/01/07093633/GettyImages-887815620.jpg',
+  bio: 'Vestibulum porttitor in enim quis accumsan. Etiam bibendum augue pretium magna tincidunt.'
 }
 
 app.get('/feed', (req, res) => {

@@ -1,28 +1,31 @@
-import { Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardActions, CardContent, CardMedia, Typography } from '@mui/material';
 import React from 'react';
-import person from '../../../assets/person.jpg';
+import User from '../../account/types/User';
 import FollowButton from './FollowButton';
 
-export default function ProfileCard() {
+export default function ProfileCard({ firstName, lastName, pictureUrl, city, country, bio }: User) {
   return <>
     <Card sx={{ display: { xs: 'none', md: 'block' } }} variant="outlined">
-      <CardMedia
-        component="img"
-        image={person}
-        alt="Paella dish"
-      />
+      <Box sx={{ paddingTop: '100%', position: 'relative' }}>
+        <CardMedia
+          sx={{ position: 'absolute', top: 0, height: '100%' }}
+          component="img"
+          image={pictureUrl as string}
+          alt="Paella dish"
+        />
+      </Box>
       <CardContent sx={{ position: 'relative', marginTop: '-48px', paddingBottom: '16px !important' }}>
-        <Card elevation={0} variant="outlined">
+        <Card>
           <CardContent>
             <Typography variant="h6">
-              Murilo Henrique
-          </Typography>
+              {firstName} {lastName}
+            </Typography>
             <Typography variant="caption">
-              Curitiba, Brazil
-          </Typography>
+              {city}, {country}
+            </Typography>
             <Typography variant="body2" sx={{ mt: 1 }}>
-              Vestibulum porttitor in enim quis accumsan. Etiam bibendum augue pretium magna tincidunt.
-          </Typography>
+              {bio}
+            </Typography>
           </CardContent>
           <CardActions>
             <FollowButton following={false} />

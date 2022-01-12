@@ -1,10 +1,15 @@
 import React, { ReactElement } from 'react';
+import User from '../../account/types/User';
 import MobileProfileCard from './MobileProfileCard';
 import ProfileCard from './ProfileCard';
 
-export default function ProfileDetailsColumn(): ReactElement {
+type ProfileDetailsColumnProps = {
+  user: User
+}
+
+export default function ProfileDetailsColumn({ user }: ProfileDetailsColumnProps): ReactElement {
   return <>
-    <ProfileCard />
-    <MobileProfileCard />
+    <ProfileCard {...user} />
+    <MobileProfileCard {...user} />
   </>
 }
