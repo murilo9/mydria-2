@@ -8,9 +8,9 @@ import PostData from '../types/PostData';
 export default function Post({ created, user, body, tags }: PostData) {
   const postPicture = body.picture ?
     <>
-      <Box sx={{ position: 'relative', height: 0, paddingTop: '100%', overflow: 'hidden' }}>
+      <Box sx={{ position: 'relative', height: 0, paddingTop: '70%', overflow: 'hidden' }}>
         <CardMedia
-          sx={{ position: 'absolute', top: 0 }}
+          sx={{ position: 'absolute', top: 0, height: '100%' }}
           component="img"
           image={body.picture}
           alt="Paella dish"
@@ -45,8 +45,8 @@ export default function Post({ created, user, body, tags }: PostData) {
         </Typography>
       </CardContent>
       {postPicture}
-      <CardActions>
-        <LikeButton amount={12} active={false} />
+      <CardActions sx={{ justifyContent: { xs: 'end', md: 'start' }, flexDirection: { xs: 'row-reverse', md: 'row' } }}>
+        <LikeButton amount={12} active={false} sx={{ ml: { xs: 1, md: 0 } }} />
         <DislikeButton amount={5} active={false} />
       </CardActions>
     </Card>
