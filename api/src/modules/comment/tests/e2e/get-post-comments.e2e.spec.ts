@@ -19,7 +19,7 @@ describe('Flow: get post comments', () => {
     xAccessToken = loginRequest.text;
   })
 
-  it('should get post comments', async () => {
+  xit('should get post comments', async () => {
     const { app } = new MydriaApp();
     const postId = 'noPostIdWasSetOnCurrentTest'
     const res = await chai.request(app)

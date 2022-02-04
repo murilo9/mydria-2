@@ -19,7 +19,7 @@ describe('Flow: react to resource', () => {
     xAccessToken = loginRequest.text;
   })
 
-  it('should react to comment', async () => {
+  xit('should react to comment', async () => {
     const { app } = new MydriaApp();
     const postId = 'noCommentIdWasSetOnCurrentTest'
     const res = await chai.request(app)
@@ -29,7 +29,7 @@ describe('Flow: react to resource', () => {
     expect(res.status).to.be.equal(200)
   });
 
-  it('should react to post', async () => {
+  xit('should react to post', async () => {
     const { app } = new MydriaApp();
     const commentId = 'noPOstIdWasSetOnCurrentTest'
     const res = await chai.request(app)
