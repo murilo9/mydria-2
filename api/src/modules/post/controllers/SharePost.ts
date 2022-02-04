@@ -17,22 +17,26 @@ export default class SharePostController implements IAssertiveController {
   async handle(request: CreatePostRequest): Promise<Result<Post>> {
     const userId = request.headers['user-id'];
     const postToShareId = request.params.postId;
-    const postToShare = await getPostFromDatabase(postToShareId);
-    if (postToShare) {
-      const shareToCreate: Share = {
-        user: userId,
-        created: new Date(),
-        updated: new Date(),
-        sharedFrom: postToShareId,
-        ...request.body,
-      };
-      const sharePostResult = await insertPostOnDatabase(shareToCreate);
-      return sharePostResult;
+    const getPostToShare = await getPostFromDatabase(postToShareId);
+    if (getPostToShare.failed) {
+      return getPostToShare
     }
-    return {
-      statusCode: 404,
-      failed: true,
-      payload: 'Post not found.',
+    const postToShare = getPostToShare.payload
+    if (postToShare.sharedFrom) {
+      return {
+        failed: true,
+        statusCode: 400,
+        payload: 'Cannot share a share',
+      }
     }
+    const shareToCreate: Share = {
+      user: userId,
+      created: new Date(),
+      updated: new Date(),
+      sharedFrom: postToShareId,
+      ...request.body,
+    };
+    const sharePostResult = await insertPostOnDatabase(shareToCreate);
+    return sharePostResult;
   }
 }
