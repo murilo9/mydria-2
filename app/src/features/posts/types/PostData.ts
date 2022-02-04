@@ -8,5 +8,20 @@ export default interface PostData extends PersistentEntity {
     picture?: string,
     link?: string
   },
-  tags: String[]
+  tags: String[],
+
+  sharedFrom?: {
+    created: Date,
+    updated: Date,
+    user: User,
+    body: {
+      text: string,
+      picture?: string,
+      link?: string
+    },
+    tags: String[],
+  },
+
+  // Indicated whether the current component is a shared post conent or an original post
+  resumed: boolean
 }
