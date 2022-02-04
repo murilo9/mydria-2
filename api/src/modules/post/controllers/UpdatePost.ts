@@ -18,10 +18,11 @@ export default class UpdatePostController implements IAssertiveController, IRest
 
   async handle(request: UpdatePostRequest): Promise<Result<Post>> {
     const { postId } = request.params;
+    const { body, tags } = request.body;
     const postToUpdate = {
-      ...request.body,
+      body,
+      tags,
     };
-    // TODO: update only the allowed fields
     const updatePostResult = await updatePostOnDatabase(postId, postToUpdate);
     return updatePostResult;
   }

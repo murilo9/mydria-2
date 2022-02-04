@@ -2,9 +2,10 @@ import { MongoClient } from 'mongodb';
 import getClient from '../../mongo/functions/getClient';
 import Result from '../../system/types/Result';
 import CreatePostForm from '../types/CreatePostForm';
+import CreateShareForm from '../types/CreateShareForm';
 import Post from '../types/Post';
 
-export default async function insertPostOnDatabase(post: CreatePostForm): Promise<Result<Post>> {
+export default async function insertPostOnDatabase(post: CreatePostForm | CreateShareForm): Promise<Result<Post>> {
   const requestClientResult = await getClient();
   if (requestClientResult.failed) {
     return requestClientResult;

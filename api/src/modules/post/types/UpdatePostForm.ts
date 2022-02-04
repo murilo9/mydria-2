@@ -4,5 +4,6 @@ export default interface UpdatePostForm {
     picture?: string,
     link?: string
   },
-  tags: String[]
+  tags: String[],
+  shared?: string
 }
