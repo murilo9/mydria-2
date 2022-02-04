@@ -1,2 +1,7 @@
+MEDIUM PRIORITY
+- Make Comments module (Comment and PostComments components)
+
+LOW PRIORITY
 - clean unused variables
 - fix Post pictures size (search for a sutiable way)
+- remove problematic type castings
