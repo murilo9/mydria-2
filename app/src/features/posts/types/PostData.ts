@@ -2,6 +2,7 @@ import PersistentEntity from "../../../types/PersistentEntity";
 import User from "../../account/types/User";
 
 export default interface PostData extends PersistentEntity {
+  _id: string,
   user: User,
   body: {
     text: string,
@@ -11,6 +12,7 @@ export default interface PostData extends PersistentEntity {
   tags: String[],
 
   sharedFrom?: {
+    _id: string,
     created: Date,
     updated: Date,
     user: User,

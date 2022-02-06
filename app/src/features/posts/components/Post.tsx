@@ -1,11 +1,40 @@
 import { MoreVert, Reply } from '@mui/icons-material';
-import { Card, CardHeader, CardContent, CardActions, Avatar, IconButton, CardMedia, Box, Button, Typography } from '@mui/material';
-import React from 'react';
+import { Card, CardHeader, CardContent, CardActions, Avatar, IconButton, CardMedia, Box, Button, Typography, Paper, Link } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import DislikeButton from '../../../components/Elements/DislikeButton';
 import LikeButton from '../../../components/Elements/LikeButton';
 import PostData from '../types/PostData';
+import CommentData from '../../comments/types/Comment';
+import CommentsButton from '../../../components/Elements/CommentsButton';
+import getPostComments from '../../comments/api/getPostComments';
+import CommentsSection from './CommentsSection';
 
-export default function Post({ created, user, body, tags, sharedFrom, resumed }: PostData) {
+export default function Post({ created, user, body, tags, _id, sharedFrom, resumed }: PostData) {
+  const [comments, setComments] = useState([] as CommentData[])
+
+  const [loadingComments, setLoadingComments] = useState(false)
+  const [commentsError, setCommentsError] = useState('')
+
+  // Loads comments from server
+  const loadComments = async () => {
+    getPostComments(_id).then(getCommentsResult => {
+      if (getCommentsResult.failed) {
+        setCommentsError('There was an error while loading the comments.')
+      }
+      else {
+        const comments = getCommentsResult.payload
+        setComments(comments)
+      }
+      setLoadingComments(false)
+    })
+  }
+
+  // Loads post comments
+  const onShowCommentsClick = () => {
+    setLoadingComments(true)
+    loadComments()
+  }
+
   const postPicture = body.picture ?
     <>
       <Box sx={{ position: 'relative', height: 0, paddingTop: '70%', overflow: 'hidden' }}>
@@ -19,7 +48,7 @@ export default function Post({ created, user, body, tags, sharedFrom, resumed }:
     </>
     : null
 
-  const sharedPost = sharedFrom ?
+  const sharedPost = sharedFrom !== undefined ?
     <Post {...sharedFrom} resumed />
     : null
 
@@ -43,21 +72,27 @@ export default function Post({ created, user, body, tags, sharedFrom, resumed }:
               </IconButton>
             </>
         }
-        title={`${user.firstName} ${user.lastName}`}
-        subheader={new Date(created).toDateString()}
+        title={<Typography variant="subtitle1" sx={{ fontWeight: 500 }}>{`${user.firstName} ${user.lastName}`}</Typography>}
+        subheader={<Typography variant="caption" color="text.secondary">{new Date(created).toDateString()}</Typography>}
       ></CardHeader>
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
+      <CardContent sx={{ paddingBottom: 1, paddingTop: 0 }}>
+        <Typography variant="body2">
           {body.text}
         </Typography>
       </CardContent>
       {postPicture || sharedPost}
       {
-        !resumed ?
+        !resumed ?  /* Shows post actions section only if not on mini-post */
           <CardActions sx={{ justifyContent: { xs: 'end', md: 'start' }, flexDirection: { xs: 'row-reverse', md: 'row' } }}>
             <LikeButton amount={12} active={false} sx={{ ml: { xs: 1, md: 0 } }} />
-            <DislikeButton amount={5} active={false} />
+            <DislikeButton amount={5} active={false} sx={{ ml: { xs: 1, md: 0 } }} />
+            <CommentsButton amount={comments.length} onClick={onShowCommentsClick} />
           </CardActions>
+          : null
+      }
+      {
+        !resumed ?
+          <CommentsSection loadingComments={loadingComments} comments={comments} error={commentsError} />
           : null
       }
     </Card>

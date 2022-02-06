@@ -47,7 +47,7 @@ const somePosts = [
   {
     created: new Date(),
     updated: new Date(),
-    _id: '0',
+    _id: '2',
     user: {
       firstName: 'John',
       lastName: 'Doe',
@@ -83,6 +83,63 @@ const somePosts = [
   },
 ]
 
+const someComments = [
+  {
+    _id: 'aaaaaaa1',
+    created: new Date(),
+    updated: new Date(),
+    post: '',
+    user: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@email.com',
+      city: 'Curitiba',
+      country: 'Brazil',
+      birthDate: new Date(),
+      gender: 'MASCULINE',
+      bio: '',
+      pictureUrl: null
+    },
+    body: 'Lorem ipsum dolor sit amet consecteur ipsum ralem malif'
+  },
+  {
+    _id: 'aaaaaaa2',
+    created: new Date(),
+    updated: new Date(),
+    post: '',
+    user: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@email.com',
+      city: 'Curitiba',
+      country: 'Brazil',
+      birthDate: new Date(),
+      gender: 'MASCULINE',
+      bio: '',
+      pictureUrl: null
+    },
+    body: 'Lorem ipsum dolor sit amet consecteur ipsum ralem malif'
+  },
+  {
+    _id: 'aaaaaaa3',
+    created: new Date(),
+    updated: new Date(),
+    post: '',
+    user: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@email.com',
+      city: 'Curitiba',
+      country: 'Brazil',
+      birthDate: new Date(),
+      gender: 'MASCULINE',
+      bio: '',
+      pictureUrl: null
+    },
+    body: 'Lorem ipsum dolor sit amet consecteur ipsum ralem malif'
+  },
+]
+
 const johnDoe = {
   firstName: 'John',
   lastName: 'Doe',
@@ -104,6 +161,15 @@ app.get('/profile/:userId/posts', (req, res) => {
 
 app.get('/profile/:userId', (req, res) => {
   res.send(johnDoe)
+})
+
+app.get('/post/:postId/comments', (req, res) => {
+  const totalComments = []
+  for (let i = 0; i < 20; i++) {
+    totalComments.push(someComments[0])
+    totalComments[i]._id = i
+  }
+  res.send(totalComments)
 })
 
 // TODO routes

@@ -5,3 +5,4 @@ LOW PRIORITY
 - clean unused variables
 - fix Post pictures size (search for a sutiable way)
 - remove problematic type castings
+- each big {} section of a component may be split off into a separate component

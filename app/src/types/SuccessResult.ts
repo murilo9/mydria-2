@@ -3,7 +3,7 @@
  */
 type SuccessResult<T> = {
   failed: false,
-  payload?: T,
+  payload: T,
   statusCode?: number
 }
 
